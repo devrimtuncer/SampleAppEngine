@@ -7,6 +7,7 @@ This is a simple app engine module template which uses;
 <li>Memcache (see RegistrationUtils and CacheUtils)</li>
 <li>Google Cloud Messaging Registration and Notification (see RegistrationEndpoint and NotifyServlet)</li>
 <li>Cron Tasks (see cron.xml)</li>
+<li>Unit Tests for DataStore and MemCache operations (see NotificationTest and RegistrationTest)</li>
 </ol>
 
 <b>NOTE:</b> Do not forget to set your api key at appengine-web.xml file.
