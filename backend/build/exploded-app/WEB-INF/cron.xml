@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<cronentries>
-    <cron>
-        <url>/cron/notify</url>
-        <description>Notify users every 2</description>
-        <schedule>every 2 minutes</schedule>
-        <timezone>Europe/Istanbul</timezone>
-    </cron>
-</cronentries>

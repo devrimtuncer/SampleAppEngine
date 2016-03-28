@@ -14,6 +14,8 @@ import java.util.List;
 import static com.devrimtuncer.sample.backend.OfyService.ofy;
 
 /**
+ * class for registration operations
+ *
  * Created by devrimtuncer on 28/03/16.
  */
 public class RegistrationUtils {
@@ -23,7 +25,7 @@ public class RegistrationUtils {
     private static final int LOAD_AT_A_TIME = 10000;
     private static final String CACHE_KEY = "CACHE_KEY_REGISTRATIONS";
 
-    public static boolean addRegistration(RegistrationRecord registrationRecord) {
+    public static synchronized boolean addRegistration(RegistrationRecord registrationRecord) {
         List<RegistrationRecord> registrationList = getRegistrations();
 
         RegistrationRecord savedRecord = getRegistration(registrationList, registrationRecord.getRegId());
@@ -45,7 +47,7 @@ public class RegistrationUtils {
         return true;
     }
 
-    public static boolean updateRegistration(String oldRegId, String newRegId) {
+    public static synchronized boolean updateRegistration(String oldRegId, String newRegId) {
         List<RegistrationRecord> registrationList = getRegistrations();
 
         RegistrationRecord savedRecord = getRegistration(registrationList, oldRegId);
@@ -63,7 +65,7 @@ public class RegistrationUtils {
         }
     }
 
-    public static boolean removeRegistration(String regId) {
+    public static synchronized boolean removeRegistration(String regId) {
         List<RegistrationRecord> registrationList = getRegistrations();
 
         RegistrationRecord savedRecord = getRegistration(registrationList, regId);
@@ -93,7 +95,7 @@ public class RegistrationUtils {
             RegistrationRecord key = new RegistrationRecord();
             key.setRegId(regId);
 
-            int index = Collections.binarySearch(registrationList, key, RegistrationUtils.registrationComparator);
+            int index = Collections.binarySearch(registrationList, key, RegistrationUtils.REGISTRATION_COMPARATOR);
             if (index >= 0) {
                 record = registrationList.get(index);
             }
@@ -103,7 +105,7 @@ public class RegistrationUtils {
 
     public static List<RegistrationRecord> getRegistrations() {
         List<RegistrationRecord> registrationRecordList;
-        Object cachedObject = null;
+        Object cachedObject;
         if(USE_MEM_CACHE) {
             cachedObject = CacheUtils.getFromCache(CACHE_KEY);
         }
@@ -143,7 +145,7 @@ public class RegistrationUtils {
     }
 
     // comparators
-    private static Comparator<RegistrationRecord> registrationComparator = new Comparator<RegistrationRecord>() {
+    private static Comparator<RegistrationRecord> REGISTRATION_COMPARATOR = new Comparator<RegistrationRecord>() {
 
         public int compare(RegistrationRecord record1, RegistrationRecord record2) {
             return record1.getRegId().compareTo(record2.getRegId());

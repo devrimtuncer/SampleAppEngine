@@ -22,12 +22,18 @@ sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
 
 dependencies {
-  appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.18'
-  compile 'com.google.appengine:appengine-endpoints:1.9.18'
-  compile 'com.google.appengine:appengine-endpoints-deps:1.9.18'
+  appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.34'
+  compile 'com.google.appengine:appengine-endpoints:1.9.34'
+  compile 'com.google.appengine:appengine-endpoints-deps:1.9.34'
   compile 'javax.servlet:servlet-api:2.5'
-  compile 'com.googlecode.objectify:objectify:4.0b3'
+  compile 'com.googlecode.objectify:objectify:5.1.12'
   compile 'com.ganyo:gcm-server:1.0.2'
+
+  compile 'com.google.appengine:appengine-api-1.0-sdk:1.9.34'
+
+  testCompile 'com.google.appengine:appengine-testing:1.9.34'
+  testCompile 'com.google.appengine:appengine-api-stubs:1.9.34'
+  testCompile 'junit:junit:4.4'
 }
 
 appengine {

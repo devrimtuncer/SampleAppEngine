@@ -63,11 +63,11 @@ public class RegistrationEndpoint {
     /**
      * Return a collection of registered devices
      *
-     * @param count The number of devices to list
      * @return a list of Google Cloud Messaging registration Ids
      */
-    @ApiMethod(name = "listDevices")
-    public CollectionResponse<RegistrationRecord> listDevices(@Named("count") int count) {
+    @ApiMethod(name = "listAllDevices")
+    public CollectionResponse<RegistrationRecord> listAllDevices() {
+        // TODO: implement a hash logic before processing request
         List<RegistrationRecord> records = RegistrationUtils.getRegistrations();
         return CollectionResponse.<RegistrationRecord>builder().setItems(records).build();
     }

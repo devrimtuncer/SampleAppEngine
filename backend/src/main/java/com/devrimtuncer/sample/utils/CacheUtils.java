@@ -7,6 +7,8 @@ import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import java.util.logging.Level;
 
 /**
+ * class for memCache operations
+ *
  * Created by devrimtuncer on 28/03/16.
  */
 public abstract class CacheUtils {

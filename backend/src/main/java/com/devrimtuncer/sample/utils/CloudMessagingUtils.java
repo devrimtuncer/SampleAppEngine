@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
+ * class for cloud messaging operations
+ *
  * Created by devrimtuncer on 28/03/16.
  */
 public abstract class CloudMessagingUtils {
