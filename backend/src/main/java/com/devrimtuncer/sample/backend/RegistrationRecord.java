@@ -5,7 +5,6 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /** The Objectify object model for device registrations we are persisting */
 @Entity
@@ -17,7 +16,6 @@ public class RegistrationRecord implements Serializable {
     @Index
     private String regId;
 
-    private Date createTime;
     // you can add more fields...
 
     public RegistrationRecord() {}
@@ -29,13 +27,4 @@ public class RegistrationRecord implements Serializable {
     public void setRegId(String regId) {
         this.regId = regId;
     }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
 }

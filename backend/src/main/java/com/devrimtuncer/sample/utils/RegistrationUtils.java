@@ -6,7 +6,6 @@ import com.google.appengine.api.datastore.QueryResultIterator;
 import com.googlecode.objectify.cmd.Query;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -34,9 +33,6 @@ public class RegistrationUtils {
             // already registered
             return false;
         } else {
-            // TODO: Calendar.getInstance() with turkish locale?
-            registrationRecord.setCreateTime(Calendar.getInstance().getTime());
-
             ofy().save().entity(registrationRecord).now();
             registrationList.add(registrationRecord);
         }

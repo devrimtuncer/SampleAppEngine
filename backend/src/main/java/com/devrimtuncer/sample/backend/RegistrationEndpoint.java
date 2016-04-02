@@ -6,6 +6,7 @@
 
 package com.devrimtuncer.sample.backend;
 
+import com.devrimtuncer.sample.backend.model.RegisterRequest;
 import com.devrimtuncer.sample.utils.RegistrationUtils;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -13,8 +14,6 @@ import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
 
 import java.util.List;
-
-import javax.inject.Named;
 
 /**
  * A registration endpoint class we are exposing for a device's GCM registration id on the backend
@@ -39,35 +38,27 @@ public class RegistrationEndpoint {
     /**
      * Register a device to the backend
      *
-     * @param regId The Google Cloud Messaging registration Id to add
+     * @param registerRequest Model which has the Google Cloud Messaging registration Id to add
      */
     @ApiMethod(name = "register")
-    public void registerDevice(@Named("regId") String regId) {
-        // TODO: implement a hash logic before processing request
+    public void registerDevice(RegisterRequest registerRequest) throws Exception{
+        // 1) Validate incoming request
+        registerRequest.validate();
+
+        // 2) Save registration
         RegistrationRecord record = new RegistrationRecord();
-        record.setRegId(regId);
+        record.setRegId(registerRequest.getRegId());
         RegistrationUtils.addRegistration(record);
     }
 
     /**
-     * Unregister a device from the backend
-     *
-     * @param regId The Google Cloud Messaging registration Id to remove
-     */
-    @ApiMethod(name = "unregister")
-    public void unregisterDevice(@Named("regId") String regId) {
-        // TODO: implement a hash logic before processing request
-        RegistrationUtils.removeRegistration(regId);
-    }
-
-    /**
-     * Return a collection of registered devices
+     * Return a collection of registered devices,
      *
      * @return a list of Google Cloud Messaging registration Ids
      */
     @ApiMethod(name = "listAllDevices")
     public CollectionResponse<RegistrationRecord> listAllDevices() {
-        // TODO: implement a hash logic before processing request
+        // TODO: Remove this method for vulnerability or allow access to admin only
         List<RegistrationRecord> records = RegistrationUtils.getRegistrations();
         return CollectionResponse.<RegistrationRecord>builder().setItems(records).build();
     }
